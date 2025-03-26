@@ -31,4 +31,4 @@ response = client.chat.completions.create(
         {"role": "user", "content": user_prompt}
     ]
 )
-st.markdown(response["choices"][0]["message"]["content"])
+st.markdown(response.choices[0].message.content)
