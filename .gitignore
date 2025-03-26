@@ -1,0 +1,10 @@
+# Ignore secret API keys
+.streamlit/secrets.toml
+
+# Ignore Python junk
+__pycache__/
+*.pyc
+
+# Ignore virtual environments (if you create one later)
+venv/
+env/
