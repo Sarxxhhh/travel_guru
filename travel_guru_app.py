@@ -1,7 +1,8 @@
 import streamlit as st
+from openai import OpenAI
 import openai
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 st.set_page_config(page_title="Travel Guru", page_icon="🌍")
 st.title("🌍 Travel Guru: Your Personalized Itinerary Planner")
@@ -21,11 +22,13 @@ if st.button("Generate Itinerary"):
         Travel dates: {dates if dates else 'not specified'}.
         Structure the itinerary by day, include morning/afternoon/evening activities, minimize travel time, and suggest places to eat or explore.
         """
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "You are a helpful travel planner named Travel Guru."},
-                {"role": "user", "content": user_prompt}
-            ]
-        )
-        st.markdown(response["choices"][0]["message"]["content"])
+      
+client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "You are a helpful travel planner named Travel Guru."},
+        {"role": "user", "content": user_prompt}
+    ]
+)
+st.markdown(response["choices"][0]["message"]["content"])
